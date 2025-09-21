@@ -80,6 +80,13 @@
         {"name": "Functional Equations - MOMC 2024 Training Camp","type": "pdf","dataURL": "A1.pdf","createdAt": 1690000000000}
       ]
     };
+    <script>
+const password = "mypassword";
+const userPass = prompt("Enter password to access this page:");
+if(userPass !== password){
+  document.body.innerHTML = "<h2>Access Denied</h2>";
+}
+</script>
 
     function renderSections(sections){
       fileGrid.innerHTML = '';
@@ -119,3 +126,4 @@
   </script>
 </body>
 </html>
+
