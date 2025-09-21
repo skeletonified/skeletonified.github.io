@@ -5,29 +5,50 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Math Olympiad Materials</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#7c3aed;--glass:rgba(255,255,255,0.03)}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
-    body{background:linear-gradient(180deg,#071124 0%, #071428 60%);color:#e6eef6;padding:20px}
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#7c3aed;
+      --glass:rgba(255,255,255,0.03)
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg,#071124 0%, #071428 60%);
+      color:#e6eef6;
+      padding:20px;
+    }
     .wrap{max-width:1100px;margin:0 auto}
-    h1{margin:0;font-size:20px}
-    h2{margin-top:24px;color:var(--accent)}
+    h1{margin:0;font-size:28px}
+    .header-desc{color:var(--muted);margin-top:8px;font-size:16px;line-height:1.4;}
+    h2{margin-top:32px;color:var(--accent)}
     .filegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
     .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:10px;border-radius:10px;box-shadow:0 6px 24px rgba(2,6,23,0.6)}
     .meta{margin-top:8px}
     .muted{color:var(--muted);font-size:13px}
     .title{font-weight:600;letter-spacing:0.2px}
     .actions{display:flex;gap:6px;margin-top:8px}
-    .small{font-size:12px;color:var(--muted)}
+    .socials{margin-top:24px;border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;font-size:14px;}
+    .socials a{color:var(--accent);margin-right:12px;text-decoration:none;}
+    .socials a:hover{text-decoration:underline;}
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Math Olympiad Materials by Hsu Wutt Yee Lin</h1>
-<p style="color: var(--muted); margin-top: 8px; font-size: 14px;">
-  Free learning materials and practice problems collected by me through Instructing Math Olympiad.
-</p>
+    <p class="header-desc">
+      Welcome! Here you'll find curated handouts, practice problems, and training materials collected from my experience teaching Math Olympiad. Feel free to download and use them to sharpen your problem-solving skills.
+    </p>
 
     <div id="fileGrid" aria-live="polite"></div>
+
+    <div class="socials">
+        Connect with me: 
+        <a href="mailto:cholerossi198@gmail.com">Gmail</a>
+        <a href="https://github.com/skeletonified" target="_blank">GitHub</a>        
+    </div>
   </div>
 
   <template id="cardT">
@@ -45,70 +66,24 @@
     const fileGrid = document.getElementById('fileGrid');
     const cardT = document.getElementById('cardT');
 
-    // --------------------
-    // Sections and files
     const backupSections= {
       "Handout": [
-        {
-          "name": "Foundation of Mathematical Olympiad (2025)",
-          "type": "pdf",
-          "size": 234567,
-          "dataURL": "handout1.pdf",
-          "createdAt": 1690000000000
-        }
+        {"name": "Foundation of Mathematical Olympiad (2025)", "type": "pdf","dataURL": "handout1.pdf","createdAt": 1690000000000}
       ],
       "QuadriSchool Math Tournament": [
-        {
-          "name": "Introduction to Olympiad Algebra (2025)",
-          "type": "pdf",
-          "size": 234567,
-          "dataURL": "QSMT_Mini_camp_solution.pdf",
-          "createdAt": 1690000000000
-        },
-        {
-          "name": "Divisibility - Quadri-School Math Tournament (2024) Day 1",
-          "type": "pdf",
-          "size": 234567,
-          "dataURL": "NT2.pdf",
-          "createdAt": 1690000000000
-        },
-        {
-          "name": "MODULAR ARITHMETIC - Quadri-School Math Tournament (2024) Day 2",
-          "type": "pdf",
-          "size": 234567,
-          "dataURL": "NT3.pdf",
-          "createdAt": 1690000000000
-        }
+        {"name": "Introduction to Olympiad Algebra (2025)","type": "pdf","dataURL": "QSMT_Mini_camp_solution.pdf","createdAt": 1690000000000},
+        {"name": "Divisibility - Quadri-School Math Tournament (2024) Day 1","type": "pdf","dataURL": "NT2.pdf","createdAt": 1690000000000},
+        {"name": "MODULAR ARITHMETIC - Quadri-School Math Tournament (2024) Day 2","type": "pdf","dataURL": "NT3.pdf","createdAt": 1690000000000}
       ],
       "MOMC Camp": [
-        {
-          "name": "Mixed Number Theory - MOMC 2024 Training Camp",
-          "type": "pdf",
-          "size": 234567,
-          "dataURL": "NT1_Solutions.pdf",
-          "createdAt": 1690000000000
-        },
-        {
-          "name": "Functional Equations - MOMC 2024 Training Camp",
-          "type": "pdf",
-          "size": 234567,
-          "dataURL": "A1.pdf",
-          "createdAt": 1690000000000
-        }
+        {"name": "Mixed Number Theory - MOMC 2024 Training Camp","type": "pdf","dataURL": "NT1_Solutions.pdf","createdAt": 1690000000000},
+        {"name": "Functional Equations - MOMC 2024 Training Camp","type": "pdf","dataURL": "A1.pdf","createdAt": 1690000000000}
       ]
     };
-    // --------------------
-
-    function fmtBytes(b){ 
-      if(b<1024) return b+' B'; 
-      if(b<1024*1024) return (b/1024).toFixed(1)+' KB'; 
-      return (b/1024/1024).toFixed(2)+' MB' 
-    }
 
     function renderSections(sections){
       fileGrid.innerHTML = '';
       for(const [sectionName, files] of Object.entries(sections)){
-        // Section header
         const header = document.createElement('h2');
         header.textContent = sectionName;
         fileGrid.appendChild(header);
@@ -120,12 +95,10 @@
         for(const item of files){
           const el = cardT.content.cloneNode(true);
           const title = el.querySelector('.title');
-          const size = el.querySelector('.size');
           const type = el.querySelector('.type');
           const actions = el.querySelector('.actions');
 
           title.textContent = item.name;
-          size.textContent = "";
           type.textContent = item.type || '';
 
           const dl = document.createElement('a');
@@ -138,7 +111,6 @@
 
           sectionGrid.appendChild(el);
         }
-
         fileGrid.appendChild(sectionGrid);
       }
     }
